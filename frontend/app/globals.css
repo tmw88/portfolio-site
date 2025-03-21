@@ -1,4 +1,4 @@
-/*globals.css*/
+/* globals.css */
 
 :root {
   --background: #ffffff;
@@ -41,4 +41,52 @@ a {
   html {
     color-scheme: dark;
   }
+}
+/* Hero Section with Animated Gradient */
+.heroSection {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fix Blurry Edges: Expand the Background */
+.heroSection::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%; /* Increase size to avoid visible blur cut-off */
+  background: linear-gradient(120deg, #6a11cb, #2575fc, #ff512f, #dd2476);
+  background-size: 300% 300%;
+  animation: gradientAnimation 8s ease infinite;
+  z-index: -1;
+  filter: blur(50px); /* Keep blur but extend edges */
+}
+
+/* Keyframes for Gradient Animation */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Main Content with White Background */
+.mainContent {
+  background: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  position: relative;
+  z-index: 1;
 }
