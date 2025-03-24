@@ -24,6 +24,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
@@ -42,6 +43,7 @@ a {
     color-scheme: dark;
   }
 }
+
 /* Hero Section with Animated Gradient */
 .heroSection {
   height: 100vh;
@@ -89,4 +91,48 @@ a {
   padding-bottom: 50px;
   position: relative;
   z-index: 1;
+}
+
+/* Light Mode */
+body.light {
+  background-color: #f4f4f4;
+  color: #000;
+}
+
+body.light .card {
+  background-color: #fff;
+  color: #000;
+}
+
+body.light .navbar {
+  background-color: rgba(30, 30, 30, 0.8);
+}
+
+body.light .footer {
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #121212;
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark .card {
+  background-color: #333; /* Same dark grey as the cards */
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark .navbar {
+  background-color: rgba(30, 30, 30, 0.8);
+}
+
+body.dark .footer {
+  background-color: #333; /* Same dark grey as the cards */
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

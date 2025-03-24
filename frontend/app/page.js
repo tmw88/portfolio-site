@@ -155,7 +155,7 @@ export default function Home() {
               <Row className="text-center">
                 <Col md={4}>
                   <Button
-                    variant="outline-dark"
+                    variant="outline-primary"
                     href="mailto:tristan.winship@gmail.com"
                   >
                     <FaEnvelope /> Email
@@ -163,7 +163,7 @@ export default function Home() {
                 </Col>
                 <Col md={4}>
                   <Button
-                    variant="outline-dark"
+                    variant="outline-primary"
                     href="https://github.com/TristanWinship"
                     target="_blank"
                   >
@@ -172,7 +172,7 @@ export default function Home() {
                 </Col>
                 <Col md={4}>
                   <Button
-                    variant="outline-dark"
+                    variant="outline-primary"
                     href="https://www.linkedin.com/in/tristanwinship"
                     target="_blank"
                   >
@@ -184,7 +184,7 @@ export default function Home() {
           </Container>
 
           {/* Footer Section */}
-          <footer className="mt-5 text-center bg-light py-3">
+          <footer className="footer mt-5 text-center py-3">
             <p>© 2025 Tristan Winship. All Rights Reserved.</p>
           </footer>
         </motion.div>

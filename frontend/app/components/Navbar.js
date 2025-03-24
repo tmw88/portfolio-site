@@ -1,15 +1,17 @@
-"use client"; // Required for interactive components in Next.js App Router
+// components/Navbar.js
+
 import { Navbar, Nav, Container } from "react-bootstrap";
+import { FaSun, FaMoon } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 
 const CustomNavbar = () => {
+  const { theme, toggleTheme } = useTheme(); // Destructure theme and toggleTheme
+
   return (
     <Navbar
       fixed="top"
       expand="lg"
-      style={{
-        backgroundColor: "rgba(30, 30, 30, 0.8)", // Dark gray with transparency
-        backdropFilter: "blur(10px)", // Slight blur effect
-      }}
+      className={theme} // Apply the theme class to the Navbar
     >
       <Container>
         <Navbar.Brand href="#" className="text-white fw-bold">
@@ -27,6 +29,12 @@ const CustomNavbar = () => {
             <Nav.Link href="#contact" className="text-white">
               Contact
             </Nav.Link>
+            <button
+              onClick={toggleTheme}
+              style={{ background: "none", border: "none" }}
+            >
+              {theme === "light" ? <FaMoon /> : <FaSun />}
+            </button>
           </Nav>
         </Navbar.Collapse>
       </Container>
