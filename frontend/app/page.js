@@ -1,13 +1,10 @@
 /*page.js*/
-
-"use client"; // Required for interactive components in Next.js (App Router)
+"use client"; 
 
 import { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion"; // Import useInView hook
 import {
   Container,
-  Nav,
-  Navbar,
   Button,
   Row,
   Col,
@@ -21,58 +18,17 @@ import {
   FaMoon,
 } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ProjectCard from "./components/ProjectCard";
+import CustomNavbar from "./components/Navbar";
+import AboutMe from "./components/AboutMe";
+import useFadeIn from "./hooks/useFadeIn";
 
 export default function Home() {
-  const [showContent, setShowContent] = useState(false);
-
-  useEffect(() => {
-    // Delay the appearance of the main content after the intro animation
-    const timer = setTimeout(() => {
-      setShowContent(true);
-    }, 2000); // 2-second delay
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Function to animate each section on scroll
-  const fadeInSection = {
-    initial: { opacity: 0 },
-    whileInView: { opacity: 1 },
-    transition: { duration: 1 },
-  };
+  const { showContent, fadeInSection } = useFadeIn();
 
   return (
     <div>
-      {/* Navigation Bar (Apple-style) */}
-      <Navbar
-        fixed="top"
-        expand="lg"
-        style={{
-          backgroundColor: "rgba(30, 30, 30, 0.8)", // Dark gray with transparency
-          backdropFilter: "blur(10px)", // Slight blur effect
-        }}
-      >
-        <Container>
-          <Navbar.Brand href="#" className="text-white fw-bold">
-            Tristan Winship
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbar-nav" className="border-0" />
-          <Navbar.Collapse id="navbar-nav" className="justify-content-end">
-            <Nav>
-              <Nav.Link href="#about" className="text-white">
-                About
-              </Nav.Link>
-              <Nav.Link href="#projects" className="text-white">
-                Projects
-              </Nav.Link>
-              <Nav.Link href="#contact" className="text-white">
-                Contact
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-
+      <CustomNavbar />
       {/* Hero Section with Fade-in Effect (Centered) */}
       <div className="heroSection">
         <Container>
@@ -107,32 +63,12 @@ export default function Home() {
       {/* Main Content - Delayed Fade-in */}
       {showContent && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+        initial={fadeInSection.initial}
+        whileInView={fadeInSection.whileInView}
+        transition={fadeInSection.transition}
         >
           {/* About Me Section */}
-          <Container className="mt-5 text-center" id="about">
-            <motion.div {...fadeInSection}>
-              <Row className="justify-content-center">
-                <Col md={8}>
-                  <h2>About Me</h2>
-                  <p>
-                    I am a passionate full-stack developer with experience in
-                    building scalable applications using modern technologies
-                    like Node.js, React, Next.js, and more. My focus is on
-                    creating user-friendly, high-performance websites and
-                    applications. I enjoy solving problems and continuously
-                    learning to keep up with industry trends.
-                  </p>
-                  <Button variant="outline-primary" href="#contact">
-                    Contact Me
-                  </Button>
-                </Col>
-              </Row>
-            </motion.div>
-          </Container>
-
+          <AboutMe />
           {/* Skills Section */}
           <Container className="mt-5" id="skills">
             <motion.div {...fadeInSection}>
@@ -200,33 +136,12 @@ export default function Home() {
                     link: "#",
                   },
                 ].map((project, index) => (
-                  <Col
-                    md={4}
-                    key={index}
-                    className="d-flex justify-content-center"
-                  >
-                    <motion.div
-                      whileHover={{
-                        scale: 1.1,
-                        y: -10,
-                        boxShadow: "0px 15px 20px rgba(0, 0, 0, 0.3)",
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 200,
-                        damping: 10,
-                      }}
-                    >
-                      <Card style={{ width: "100%", cursor: "pointer" }}>
-                        <Card.Body>
-                          <Card.Title>{project.title}</Card.Title>
-                          <Card.Text>{project.description}</Card.Text>
-                          <Button variant="primary" href={project.link}>
-                            View Project
-                          </Button>
-                        </Card.Body>
-                      </Card>
-                    </motion.div>
+                  <Col md={4} key={index} className="d-flex justify-content-center">
+                    <ProjectCard
+                      title={project.title}
+                      description={project.description}
+                      link={project.link}
+                    />
                   </Col>
                 ))}
               </Row>
