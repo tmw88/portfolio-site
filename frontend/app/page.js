@@ -1,15 +1,9 @@
 /*page.js*/
-"use client"; 
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion"; // Import useInView hook
-import {
-  Container,
-  Button,
-  Row,
-  Col,
-  Card,
-} from "react-bootstrap";
+import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import {
   FaGithub,
   FaLinkedin,
@@ -22,6 +16,9 @@ import ProjectCard from "./components/ProjectCard";
 import CustomNavbar from "./components/Navbar";
 import AboutMe from "./components/AboutMe";
 import useFadeIn from "./hooks/useFadeIn";
+import CustomButton from "./components/CustomButton";
+import Skills from "./components/Skills";
+import FloatingContact from "./components/FloatingContact";
 
 export default function Home() {
   const { showContent, fadeInSection } = useFadeIn();
@@ -29,7 +26,11 @@ export default function Home() {
   return (
     <div>
       <CustomNavbar />
-      {/* Hero Section with Fade-in Effect (Centered) */}
+
+      {/* Floating Contact Button (Always Visible) */}
+      <FloatingContact />
+
+      {/* Hero Section */}
       <div className="heroSection">
         <Container>
           <motion.h1
@@ -46,16 +47,14 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            Full-Stack Developer | Problem Solver | Tech Enthusiast
+            Full-Stack Developer
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
           >
-            <Button variant="primary" size="lg" href="#projects">
-              View My Projects
-            </Button>
+            <CustomButton href="#projects">View My Projects</CustomButton>
           </motion.div>
         </Container>
       </div>
@@ -63,53 +62,12 @@ export default function Home() {
       {/* Main Content - Delayed Fade-in */}
       {showContent && (
         <motion.div
-        initial={fadeInSection.initial}
-        whileInView={fadeInSection.whileInView}
-        transition={fadeInSection.transition}
+          initial={fadeInSection.initial}
+          whileInView={fadeInSection.whileInView}
+          transition={fadeInSection.transition}
         >
-          {/* About Me Section */}
           <AboutMe />
-          {/* Skills Section */}
-          <Container className="mt-5" id="skills">
-            <motion.div {...fadeInSection}>
-              <h2 className="text-center">Skills</h2>
-              <Row className="text-center">
-                <Col md={4}>
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>Frontend</Card.Title>
-                      <Card.Text>
-                        React, Next.js, HTML, CSS, JavaScript, TypeScript,
-                        Bootstrap, Material UI
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                <Col md={4}>
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>Backend</Card.Title>
-                      <Card.Text>
-                        Node.js, Express, MongoDB, MySQL, PostgreSQL, RESTful
-                        APIs, GraphQL
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                <Col md={4}>
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>Tools</Card.Title>
-                      <Card.Text>
-                        Git, Docker, AWS, Heroku, CI/CD, Jenkins, Nginx,
-                        Webpack, Babel
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </Row>
-            </motion.div>
-          </Container>
+          <Skills />
 
           {/* Projects Section */}
           <Container className="mt-5" id="projects">
@@ -136,7 +94,11 @@ export default function Home() {
                     link: "#",
                   },
                 ].map((project, index) => (
-                  <Col md={4} key={index} className="d-flex justify-content-center">
+                  <Col
+                    md={4}
+                    key={index}
+                    className="d-flex justify-content-center"
+                  >
                     <ProjectCard
                       title={project.title}
                       description={project.description}

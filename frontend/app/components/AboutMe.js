@@ -16,17 +16,17 @@ const AboutMe = () => {
           <Col md={8}>
             <h2 className="text-center">About Me</h2>
             <p>
-              I am a passionate full-stack developer with experience in
-              building scalable applications using modern technologies
-              like Node.js, React, Next.js, and more. My focus is on
-              creating user-friendly, high-performance websites and
-              applications. I enjoy solving problems and continuously
-              learning to keep up with industry trends.
+              I am a passionate full-stack developer with experience in building
+              scalable applications using modern technologies like Node.js,
+              React, Next.js, and more. My focus is on creating user-friendly,
+              high-performance websites and applications. I enjoy solving
+              problems and continuously learning to keep up with industry
+              trends.
             </p>
             <div className="d-flex justify-content-center">
-                <Button variant="outline-primary" href="#contact">
-                    Contact Me
-                </Button>
+              <Button variant="outline-primary" href="#contact">
+                Contact Me
+              </Button>
             </div>
           </Col>
         </Row>
