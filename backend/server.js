@@ -13,7 +13,6 @@ const contactLimiter = rateLimit({
   max: 5, // Limit each IP to 5 requests per window
   message: "Too many requests, please try again later.",
 });
-const sanitizedEmail = email.match(/^[\w.-]+@[\w.-]+\.\w+$/) ? email : "";
 
 app.use(
   cors({
@@ -55,6 +54,8 @@ app.post(
 
     const { name, email, message } = req.body;
     console.log("Received contact form data:", { name, email, message });
+
+    const sanitizedEmail = email.match(/^[\w.-]+@[\w.-]+\.\w+$/) ? email : "";
 
     try {
       let transporter = nodemailer.createTransport({
