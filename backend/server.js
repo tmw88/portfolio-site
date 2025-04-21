@@ -1,16 +1,29 @@
+// backend/server.js
+
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const rateLimit = require("express-rate-limit");
 const { body, validationResult } = require("express-validator");
+const mongoose = require("mongoose");
+const projectsRoute = require("./routes/projects");
 require("dotenv").config();
 
 const app = express();
 
+// 🔗 MongoDB Connection Test
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ MongoDB connected successfully"))
+  .catch((err) => console.error("❌ MongoDB connection failed:", err));
+
 // Security: Rate Limiting to prevent spam
 const contactLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 requests per window
+  windowMs: 15 * 60 * 1000,
+  max: 5,
   message: "Too many requests, please try again later.",
 });
 
@@ -24,7 +37,7 @@ app.use(
 
 app.use(express.json());
 
-// Security: Content Security Policy (CSP)
+// Security: Content Security Policy
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
@@ -37,7 +50,7 @@ app.get("/", (req, res) => {
   res.send("Backend is running!");
 });
 
-// Contact Form Route
+// 📬 Contact Form Route
 app.post(
   "/contact",
   contactLimiter,
@@ -66,10 +79,9 @@ app.post(
         },
       });
 
-      // Email Content
       let mailOptions = {
-        from: `"Portfolio Contact Form" <no-reply@yourdomain.com>`, // No-reply to avoid spoofing
-        replyTo: sanitizedEmail, // Prevent email injection
+        from: `"Portfolio Contact Form" <no-reply@yourdomain.com>`,
+        replyTo: sanitizedEmail,
         to: process.env.EMAIL_USER,
         subject: `New Contact Form Submission from ${name}`,
         text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
@@ -77,16 +89,19 @@ app.post(
 
       await transporter.sendMail(mailOptions);
       console.log("Email sent successfully!");
-
       res.json({ success: true, message: "Message sent successfully!" });
     } catch (error) {
-      console.error("Error sending email:", error); // Log detailed error server-side
+      console.error("Error sending email:", error);
       res
         .status(500)
         .json({ error: "Error sending message. Try again later." });
     }
   }
 );
+
+// 🌐 Projects API
+app.use("/api/projects", projectsRoute);
+console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
