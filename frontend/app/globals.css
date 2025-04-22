@@ -1,0 +1,119 @@
+/* In your global stylesheet or a module */
+.intro-splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 100%;
+  background-color: #0d0d0d; /* sleek dark background */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: none; /* disables clicks while showing */
+}
+
+.intro-title {
+  font-size: 4rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  font-family: "Lato", sans-serif;
+}
+
+.transition-navbar {
+  background-color: transparent;
+  padding: 1rem 0;
+  transition: background-color 0.4s ease, box-shadow 0.3s ease;
+}
+
+.navbar-scrolled {
+  background-color: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  color: #111827 !important;
+}
+
+.nav-link-custom {
+  position: relative;
+  color: #111827 !important;
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 1.5rem;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link-custom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #6366f1;
+  transition: width 0.3s ease;
+}
+
+.nav-link-custom:hover::after {
+  width: 100%;
+}
+.transition-navbar {
+  background-color: transparent;
+  padding: 1rem 0;
+  transition: background-color 0.4s ease, box-shadow 0.3s ease,
+    transform 0.3s ease;
+  will-change: transform;
+}
+
+.navbar-scrolled {
+  background-color: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-hide {
+  transform: translateY(-100%);
+}
+
+.navbar-show {
+  transform: translateY(0);
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  color: #111827 !important;
+}
+
+.nav-link-custom {
+  position: relative;
+  color: #111827 !important;
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 1.5rem;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link-custom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #6366f1;
+  transition: width 0.3s ease;
+}
+
+.nav-link-custom:hover::after {
+  width: 100%;
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Lato } from "next/font/google";
 import {
   Navbar,
@@ -10,7 +11,7 @@ import {
   NavbarToggle,
   NavLink,
 } from "react-bootstrap";
-import FloatingContact from "./FloatingContact";
+import FloatingContact from "./FloatingContact.js";
 
 const lato = Lato({
   weight: ["300", "400", "700"],
@@ -18,6 +19,29 @@ const lato = Lato({
 });
 
 export default function Layout({ children }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      setScrolled(currentScrollY > 10);
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setShowNavbar(false); // scrolling down
+      } else {
+        setShowNavbar(true); // scrolling up
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
     <div
       className={lato.className}
@@ -28,86 +52,35 @@ export default function Layout({ children }) {
       }}
     >
       <Navbar
-        style={{
-          backgroundColor: "#6366F1",
-          borderBottom: "1px solid #E5E7EB",
-        }}
-        variant="dark"
         expand="lg"
-        sticky="top"
+        fixed="top"
+        className={`transition-navbar 
+          ${scrolled ? "navbar-scrolled" : ""} 
+          ${showNavbar ? "navbar-show" : "navbar-hide"}`}
       >
         <Container>
-          <NavbarBrand
-            href="#"
-            style={{
-              color: "#FFFFFF",
-              fontWeight: 700,
-              fontSize: "1.25rem",
-              letterSpacing: "0.5px",
-            }}
-          >
+          <NavbarBrand className="nav-brand" href="#">
             TW
           </NavbarBrand>
           <NavbarToggle aria-controls="basic-navbar-nav" />
           <NavbarCollapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <NavLink
-                href="#about"
-                style={navLinkStyle}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                About
-              </NavLink>
-              <NavLink
-                href="#experience"
-                style={navLinkStyle}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                Experience
-              </NavLink>
-              <NavLink
-                href="#projects"
-                style={navLinkStyle}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                Projects
-              </NavLink>
-              <NavLink
-                href="#contact"
-                style={navLinkStyle}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                Contact
-              </NavLink>
+              {["about", "experience", "projects", "contact"].map((section) => (
+                <NavLink
+                  key={section}
+                  href={`#${section}`}
+                  className="nav-link-custom"
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </NavLink>
+              ))}
             </Nav>
           </NavbarCollapse>
         </Container>
       </Navbar>
 
-      <main>{children}</main>
+      <main style={{ paddingTop: "80px" }}>{children}</main>
       <FloatingContact />
     </div>
   );
-}
-
-const navLinkStyle = {
-  color: "#E0E7FF",
-  marginLeft: "1rem",
-  fontWeight: 400,
-  fontSize: "0.95rem",
-  textDecoration: "none",
-  transition: "color 0.3s ease",
-  cursor: "pointer",
-};
-
-function handleMouseEnter(e) {
-  e.target.style.color = "#FFFFFF";
-}
-
-function handleMouseLeave(e) {
-  e.target.style.color = "#E0E7FF";
 }
