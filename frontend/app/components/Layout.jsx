@@ -11,7 +11,7 @@ import {
   NavbarToggle,
   NavLink,
 } from "react-bootstrap";
-import { motion } from "framer-motion"; // ⬅️ Import motion
+import { motion } from "framer-motion";
 import FloatingContact from "./FloatingContact.js";
 
 const lato = Lato({
@@ -119,10 +119,12 @@ export default function Layout({ children }) {
       </motion.div>
 
       <main style={{ paddingTop: "80px" }}>{children}</main>
+
       <FloatingContact
         show={showContactModal}
         handleOpen={() => setShowContactModal(true)}
         handleClose={() => setShowContactModal(false)}
+        showAnimated={showAnimatedNavbar}
       />
     </div>
   );
