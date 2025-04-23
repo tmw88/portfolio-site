@@ -16,7 +16,7 @@ const IntroSplash = () => {
         transition={{ duration: 1 }}
         className="intro-title"
       >
-        TM
+        TW
       </motion.h1>
     </motion.div>
   );

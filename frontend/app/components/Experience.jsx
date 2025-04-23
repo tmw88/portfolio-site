@@ -15,14 +15,14 @@ export default function Experience() {
       className={lato.className}
       style={{
         padding: "80px 0",
-        backgroundColor: "#F9FAFB",
+        backgroundColor: "#E5E7EB",
         color: "#1F2937", // Slightly softer than black
       }}
     >
       <Container>
         <h2
           style={{
-            color: "#4F46E5", // Indigo heading
+            color: "#FFFFF", // Indigo heading
             fontWeight: 700,
             fontSize: "1.8rem",
             marginBottom: "2rem",

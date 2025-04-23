@@ -43,7 +43,7 @@ export default function Projects() {
       <Container>
         <h2
           style={{
-            color: "#4F46E5",
+            color: "#FFFFF",
             fontSize: "2rem",
             fontWeight: 700,
             marginBottom: "2.5rem",

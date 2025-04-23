@@ -16,77 +16,90 @@ export default function About() {
       style={{
         padding: "100px 0",
         backgroundColor: "#F9FAFB",
-        color: "#1F2937",
+        color: "#333333",
       }}
     >
-      <Container style={{ maxWidth: "720px", textAlign: "center" }}>
-        <h2
-          style={{
-            fontSize: "2rem",
-            fontWeight: 600,
-            marginBottom: "1.5rem",
-            color: "#4F46E5",
-          }}
-        >
-          About Me
-        </h2>
-        <p
-          style={{
-            fontWeight: 300,
-            fontSize: "1.05rem",
-            lineHeight: "1.8",
-            color: "#4B5563",
-            marginBottom: "1.8rem",
-          }}
-        >
-          I’m a frontend developer focused on building beautiful, accessible,
-          and responsive web applications. What started as a love for visual
-          design turned into a passion for creating digital experiences that are
-          clean, fast, and intuitive.
-        </p>
-        <p
-          style={{
-            fontWeight: 300,
-            fontSize: "1.05rem",
-            lineHeight: "1.8",
-            color: "#4B5563",
-            marginBottom: "1.5rem",
-          }}
-        >
-          Technologies I’ve been working with recently:
-        </p>
-
+      <Container>
         <div
           style={{
+            backgroundColor: "#A5B4FC",
+            color: "#333333",
+            borderRadius: "1rem",
+            padding: "3rem 4rem",
             display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "12px",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            overflow: "hidden",
+            width: "100%",
+            boxShadow: "0 6px 12px rgba(0, 0, 0, 0.05)",
           }}
         >
-          {[
-            "JavaScript (ES6+)",
-            "React",
-            "Next.js",
-            "Bootstrap",
-            "Node.js",
-            "MongoDB",
-          ].map((tech, index) => (
-            <span
-              key={index}
-              style={{
-                padding: "6px 12px",
-                backgroundColor: "#E0E7FF",
-                borderRadius: "20px",
-                border: "1px solid #6366F1",
-                color: "#111827",
-                fontSize: "0.9rem",
-                fontWeight: 400,
-              }}
-            >
-              {tech}
-            </span>
-          ))}
+          <h2
+            style={{
+              fontSize: "2rem",
+              fontWeight: 600,
+              marginBottom: "1.5rem",
+            }}
+          >
+            About Me
+          </h2>
+          <p
+            style={{
+              fontWeight: 400,
+              fontSize: "1.05rem",
+              lineHeight: "1.8",
+              marginBottom: "1.8rem",
+              maxWidth: "720px",
+              color: "#4B5563",
+            }}
+          >
+            I’m a frontend developer focused on building beautiful, accessible,
+            and responsive web applications. What started as a love for visual
+            design turned into a passion for creating digital experiences that
+            are clean, fast, and intuitive.
+          </p>
+          <p
+            style={{
+              fontWeight: 400,
+              fontSize: "1.05rem",
+              lineHeight: "1.8",
+              marginBottom: "1.5rem",
+              color: "#4B5563",
+            }}
+          >
+            Technologies I’ve been working with recently:
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "12px",
+            }}
+          >
+            {[
+              "JavaScript (ES6+)",
+              "React",
+              "Next.js",
+              "Bootstrap",
+              "Node.js",
+              "MongoDB",
+            ].map((tech, index) => (
+              <span
+                key={index}
+                style={{
+                  padding: "6px 12px",
+                  backgroundColor: "#D8D9FE",
+                  borderRadius: "20px",
+                  color: "#4B5563",
+                  fontSize: "0.9rem",
+                  fontWeight: 400,
+                }}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
       </Container>
     </section>
