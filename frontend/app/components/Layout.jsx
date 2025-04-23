@@ -24,12 +24,12 @@ export default function Layout({ children }) {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showContactModal, setShowContactModal] = useState(false);
-  const [showAnimatedNavbar, setShowAnimatedNavbar] = useState(false); // ⬅️ New state
+  const [showAnimatedNavbar, setShowAnimatedNavbar] = useState(false); // New state for navbar animation
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowAnimatedNavbar(true); // ⬅️ Show after delay
-    }, 4000); // Match hero shimmer
+      setShowAnimatedNavbar(true); // Show after delay to match hero shimmer
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -84,10 +84,13 @@ export default function Layout({ children }) {
             ${scrolled ? "navbar-scrolled" : ""} 
             ${showNavbar ? "navbar-show" : "navbar-hide"}`}
           style={{
-            backgroundColor: scrolled ? "#ffffff" : "transparent",
-            boxShadow: scrolled ? "0 2px 10px rgba(0, 0, 0, 0.05)" : "none",
-            transition: "all 0.3s ease",
+            backgroundColor: scrolled
+              ? "rgba(255, 255, 255, 0.9)"
+              : "transparent",
+            boxShadow: scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none",
             backdropFilter: "blur(8px)",
+            transition: "all 0.3s ease",
+            borderBottom: scrolled ? "1px solid rgba(0, 0, 0, 0.05)" : "none", // ✅ subtle border added
           }}
         >
           <Container>
@@ -107,6 +110,11 @@ export default function Layout({ children }) {
                         e.preventDefault();
                         handleNavClick(section);
                       }}
+                      style={{
+                        fontSize: "1.125rem",
+                        fontWeight: 400,
+                        letterSpacing: "0.05em",
+                      }}
                     >
                       {section.charAt(0).toUpperCase() + section.slice(1)}
                     </NavLink>
@@ -118,7 +126,7 @@ export default function Layout({ children }) {
         </Navbar>
       </motion.div>
 
-      <main style={{ paddingTop: "80px" }}>{children}</main>
+      <main>{children}</main>
 
       <FloatingContact
         show={showContactModal}
