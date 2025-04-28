@@ -22,35 +22,35 @@ export default function About() {
       <Container>
         <div
           style={{
-            backgroundColor: "#A5B4FC",
+            background: "linear-gradient(135deg, #c7d2fe, #a5b4fc)",
             color: "#333333",
-            borderRadius: "1rem",
+            borderRadius: "1.5rem",
             padding: "3rem 4rem",
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
             overflow: "hidden",
             width: "100%",
-            boxShadow: "0 6px 12px rgba(0, 0, 0, 0.05)",
+            gap: "1.5rem",
           }}
         >
           <h2
             style={{
-              fontSize: "2rem",
-              fontWeight: 600,
-              marginBottom: "1.5rem",
+              fontSize: "2.25rem",
+              fontWeight: 700,
+              marginBottom: "1rem",
             }}
           >
             About Me
           </h2>
+
           <p
             style={{
               fontWeight: 400,
-              fontSize: "1.05rem",
+              fontSize: "1.1rem",
               lineHeight: "1.8",
-              marginBottom: "1.8rem",
               maxWidth: "720px",
-              color: "#4B5563",
+              color: "#374151",
             }}
           >
             I’m a frontend developer focused on building beautiful, accessible,
@@ -58,13 +58,13 @@ export default function About() {
             design turned into a passion for creating digital experiences that
             are clean, fast, and intuitive.
           </p>
+
           <p
             style={{
               fontWeight: 400,
               fontSize: "1.05rem",
               lineHeight: "1.8",
-              marginBottom: "1.5rem",
-              color: "#4B5563",
+              color: "#374151",
             }}
           >
             Technologies I’ve been working with recently:
@@ -75,6 +75,7 @@ export default function About() {
               display: "flex",
               flexWrap: "wrap",
               gap: "12px",
+              marginBottom: "1.5rem",
             }}
           >
             {[
@@ -89,17 +90,36 @@ export default function About() {
                 key={index}
                 style={{
                   padding: "6px 12px",
-                  backgroundColor: "#D8D9FE",
+                  backgroundColor: "#E0E7FF",
                   borderRadius: "20px",
-                  color: "#4B5563",
+                  color: "#1F2937",
                   fontSize: "0.9rem",
-                  fontWeight: 400,
+                  fontWeight: 500,
+                  transition: "transform 0.2s ease",
+                  cursor: "default",
                 }}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.05)")
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
               >
                 {tech}
               </span>
             ))}
           </div>
+
+          <p
+            style={{
+              fontSize: "0.95rem",
+              fontStyle: "italic",
+              color: "#4B5563",
+            }}
+          >
+            When I’m not coding, I’m sketching ideas, exploring design blogs, or
+            sipping coffee while reading tech articles.
+          </p>
         </div>
       </Container>
     </section>
