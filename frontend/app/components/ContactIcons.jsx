@@ -9,7 +9,7 @@ const ContactIcons = () => {
         color: "#FFFFFF",
         padding: "2rem 0",
         textAlign: "center",
-        fontSize: "0.9rem",
+        fontSize: "var(--font-size-sm)",
       }}
     >
       <div className="contact-icons" style={{ marginBottom: "1rem" }}>
@@ -31,7 +31,7 @@ const ContactIcons = () => {
         </a>
       </div>
 
-      <div style={{ fontSize: "0.8rem", color: "#B8B8B8" }}>
+      <div style={{ fontSize: "var(--font-size-xs)", color: "#B8B8B8" }}>
         <p>
           &copy; {new Date().getFullYear()} Tristan Winship. All rights
           reserved.

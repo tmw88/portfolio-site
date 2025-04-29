@@ -36,7 +36,7 @@ export default function About() {
         >
           <h2
             style={{
-              fontSize: "2.25rem",
+              fontSize: "var(--font-size-xl)",
               fontWeight: 700,
               marginBottom: "1rem",
             }}
@@ -47,22 +47,23 @@ export default function About() {
           <p
             style={{
               fontWeight: 400,
-              fontSize: "1.1rem",
+              fontSize: "var(--font-size-lg)",
               lineHeight: "1.8",
               maxWidth: "720px",
               color: "#374151",
             }}
           >
-            I’m a frontend developer focused on building beautiful, accessible,
-            and responsive web applications. What started as a love for visual
-            design turned into a passion for creating digital experiences that
-            are clean, fast, and intuitive.
+            I’m a frontend developer who simply enjoys building things for the
+            web — from clean, intuitive user interfaces to robust backends and
+            scalable cloud infrastructure. What began as a love for visual
+            design evolved into a passion for crafting fast, accessible, and
+            thoughtful digital experiences.
           </p>
 
           <p
             style={{
               fontWeight: 400,
-              fontSize: "1.05rem",
+              fontSize: "var(--font-size-base)",
               lineHeight: "1.8",
               color: "#374151",
             }}
@@ -93,7 +94,7 @@ export default function About() {
                   backgroundColor: "#E0E7FF",
                   borderRadius: "20px",
                   color: "#1F2937",
-                  fontSize: "0.9rem",
+                  fontSize: "var(--font-size-sm)",
                   fontWeight: 500,
                   transition: "transform 0.2s ease",
                   cursor: "default",
@@ -112,13 +113,12 @@ export default function About() {
 
           <p
             style={{
-              fontSize: "0.95rem",
+              fontSize: "var(--font-size-sm)",
               fontStyle: "italic",
               color: "#4B5563",
             }}
           >
-            When I’m not coding, I’m sketching ideas, exploring design blogs, or
-            sipping coffee while reading tech articles.
+            When I’m not coding, I’m usually running, or going to concerts.
           </p>
         </div>
       </Container>

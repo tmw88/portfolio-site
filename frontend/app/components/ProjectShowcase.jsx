@@ -1,5 +1,3 @@
-// frontend/app/components/ProjectShowcase.jsx
-
 "use client";
 import { useEffect, useState } from "react";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
@@ -43,8 +41,7 @@ export default function Projects() {
       <Container>
         <h2
           style={{
-            color: "#FFFFF",
-            fontSize: "2rem",
+            fontSize: "var(--font-size-xl)",
             fontWeight: 700,
             marginBottom: "2.5rem",
           }}
@@ -67,7 +64,7 @@ export default function Projects() {
                     <Card.Title
                       style={{
                         color: "#4F46E5",
-                        fontSize: "1.25rem",
+                        fontSize: "var(--font-size-lg)",
                         fontWeight: "bold",
                       }}
                     >
@@ -88,7 +85,7 @@ export default function Projects() {
                             padding: "4px 10px",
                             marginRight: "6px",
                             marginBottom: "6px",
-                            fontSize: "0.8rem",
+                            fontSize: "var(--font-size-sm)",
                             fontWeight: 500,
                           }}
                         >

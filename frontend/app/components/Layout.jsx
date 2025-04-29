@@ -24,7 +24,7 @@ export default function Layout({ children }) {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showContactModal, setShowContactModal] = useState(false);
-  const [showAnimatedNavbar, setShowAnimatedNavbar] = useState(false); // New state for navbar animation
+  const [showAnimatedNavbar, setShowAnimatedNavbar] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -90,7 +90,7 @@ export default function Layout({ children }) {
             boxShadow: scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none",
             backdropFilter: "blur(8px)",
             transition: "all 0.3s ease",
-            borderBottom: scrolled ? "1px solid rgba(0, 0, 0, 0.05)" : "none", // ✅ subtle border added
+            borderBottom: scrolled ? "1px solid rgba(0, 0, 0, 0.05)" : "none",
           }}
         >
           <Container>
@@ -111,7 +111,7 @@ export default function Layout({ children }) {
                         handleNavClick(section);
                       }}
                       style={{
-                        fontSize: "1.125rem",
+                        fontSize: "var(--font-size-sm)", // Using the CSS variable
                         fontWeight: 400,
                         letterSpacing: "0.05em",
                       }}

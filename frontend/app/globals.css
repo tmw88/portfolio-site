@@ -1,69 +1,47 @@
-/* In your global stylesheet or a module */
+:root {
+  --font-size-xs: 0.694rem;
+  --font-size-sm: 0.833rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.2rem;
+  --font-size-lg: 1.44rem;
+  --font-size-xl: 1.728rem;
+  --font-size-2xl: 2.074rem;
+  --font-size-3xl: 2.488rem;
+  --font-size-4xl: 3rem;
+}
+
+h1 {
+  font-size: var(--font-size-2xl);
+}
+
+p {
+  font-size: var(--font-size-base);
+}
+
+/* Splash screen */
 .intro-splash {
   position: fixed;
   top: 0;
   left: 0;
   height: 100dvh;
   width: 100%;
-  background-color: #0d0d0d; /* sleek dark background */
+  background-color: #0d0d0d;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  pointer-events: none; /* disables clicks while showing */
+  pointer-events: none;
 }
 
 .intro-title {
-  font-size: 4rem;
+  font-size: var(--font-size-3xl);
   letter-spacing: 0.1em;
   font-weight: 600;
   font-family: "Lato", sans-serif;
 }
 
-.transition-navbar {
-  background-color: transparent;
-  padding: 1rem 0;
-  transition: background-color 0.4s ease, box-shadow 0.3s ease;
-}
-
-.navbar-scrolled {
-  background-color: #ffffff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-}
-
-.nav-brand {
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: 0.5px;
-  color: #111827 !important;
-}
-
-.nav-link-custom {
-  position: relative;
-  color: #111827 !important;
-  font-weight: 400;
-  font-size: 0.95rem;
-  margin-left: 1.5rem;
-  padding: 0.5rem 0;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.nav-link-custom::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #6366f1;
-  transition: width 0.3s ease;
-}
-
-.nav-link-custom:hover::after {
-  width: 100%;
-}
+/* Navbar transitions */
 .transition-navbar {
   background-color: transparent;
   padding: 1rem 0;
@@ -85,9 +63,10 @@
   transform: translateY(0);
 }
 
+/* Navbar brand and links */
 .nav-brand {
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: var(--font-size-md);
   letter-spacing: 0.5px;
   color: #111827 !important;
 }
@@ -96,7 +75,7 @@
   position: relative;
   color: #111827 !important;
   font-weight: 400;
-  font-size: 0.95rem;
+  font-size: var(--font-size-sm);
   margin-left: 1.5rem;
   padding: 0.5rem 0;
   text-decoration: none;
@@ -117,6 +96,8 @@
 .nav-link-custom:hover::after {
   width: 100%;
 }
+
+/* Gradient animation */
 .gradient-text {
   background: linear-gradient(
     120deg,

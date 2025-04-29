@@ -7,11 +7,11 @@
 }
 
 .contact-icons a {
-  color: #333;
+  color: #b8b8b8;
   font-size: 1.75rem;
   transition: color 0.2s ease;
 }
 
 .contact-icons a:hover {
-  color: #007bff;
+  color: #6366f1;
 }

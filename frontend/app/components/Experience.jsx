@@ -22,19 +22,31 @@ export default function Experience() {
       <Container>
         <h2
           style={{
-            color: "#FFFFF", // Indigo heading
             fontWeight: 700,
-            fontSize: "1.8rem",
+            fontSize: "var(--font-size-xl)",
             marginBottom: "2rem",
           }}
         >
-          Where I've Worked
+          My Experience
         </h2>
+
         <div style={{ marginTop: "2rem" }}>
           <div style={{ marginBottom: "2rem" }}>
-            <h5 style={{ color: "#1F2937", fontWeight: 600 }}>
+            <h5
+              style={{
+                color: "#1F2937",
+                fontWeight: 600,
+                fontSize: "var(--font-size-lg)",
+              }}
+            >
               Frontend Developer{" "}
-              <span style={{ color: "#6366F1", fontWeight: 500 }}>
+              <span
+                style={{
+                  color: "#6366F1",
+                  fontWeight: 500,
+                  fontSize: "var(--font-size-base)",
+                }}
+              >
                 @ Freelance
               </span>
             </h5>
@@ -43,11 +55,18 @@ export default function Experience() {
                 fontStyle: "italic",
                 color: "#6B7280",
                 fontWeight: 300,
+                fontSize: "var(--font-size-sm)",
               }}
             >
               Jan 2023 – Present
             </p>
-            <ul style={{ paddingLeft: "1.2rem", color: "#4B5563" }}>
+            <ul
+              style={{
+                paddingLeft: "1.2rem",
+                color: "#4B5563",
+                fontSize: "var(--font-size-base)",
+              }}
+            >
               <li>
                 Built responsive web applications using React and Bootstrap.
               </li>
@@ -56,31 +75,93 @@ export default function Experience() {
             </ul>
           </div>
 
-          <div style={{ marginBottom: "2rem" }}>
-            <h5 style={{ color: "#1F2937", fontWeight: 600 }}>
-              Intern Developer{" "}
-              <span style={{ color: "#6366F1", fontWeight: 500 }}>
-                @ Startup Inc
-              </span>
-            </h5>
-            <p
-              style={{
-                fontStyle: "italic",
-                color: "#6B7280",
-                fontWeight: 300,
-              }}
-            >
-              Jun 2022 – Dec 2022
-            </p>
-            <ul style={{ paddingLeft: "1.2rem", color: "#4B5563" }}>
-              <li>
-                Contributed to a React-based dashboard for internal analytics.
-              </li>
-              <li>
-                Improved accessibility and responsiveness across browsers.
-              </li>
-              <li>Collaborated with a team using Git and Agile practices.</li>
-            </ul>
+          <div style={{ marginTop: "2rem" }}>
+            <div style={{ marginBottom: "2rem" }}>
+              <h5
+                style={{
+                  color: "#1F2937",
+                  fontWeight: 600,
+                  fontSize: "var(--font-size-lg)",
+                }}
+              >
+                User Support Analyst{" "}
+                <span
+                  style={{
+                    color: "#6366F1",
+                    fontWeight: 500,
+                    fontSize: "var(--font-size-base)",
+                  }}
+                >
+                  @ MU Division of IT
+                </span>
+              </h5>
+              <p
+                style={{
+                  fontStyle: "italic",
+                  color: "#6B7280",
+                  fontWeight: 300,
+                  fontSize: "var(--font-size-sm)",
+                }}
+              >
+                Jan 2023 – Present
+              </p>
+              <ul
+                style={{
+                  paddingLeft: "1.2rem",
+                  color: "#4B5563",
+                  fontSize: "var(--font-size-base)",
+                }}
+              >
+                <li>
+                  Tested web applications for accessibiliy and complinace.
+                </li>
+                <li>
+                  Worked with clients to deliver tailored UI/UX solutions.
+                </li>
+                <li>Integrated REST APIs and optimized performance.</li>
+              </ul>
+            </div>
+
+            <div style={{ marginBottom: "2rem" }}>
+              <h5
+                style={{
+                  color: "#1F2937",
+                  fontWeight: 600,
+                  fontSize: "var(--font-size-lg)",
+                }}
+              >
+                Univeristy of Missouri🐯{" "}
+                <span
+                  style={{
+                    color: "#6366F1",
+                    fontWeight: 500,
+                    fontSize: "var(--font-size-base)",
+                  }}
+                >
+                  B.S. Information Technology
+                </span>
+              </h5>
+              <p
+                style={{
+                  fontStyle: "italic",
+                  color: "#6B7280",
+                  fontWeight: 300,
+                  fontSize: "var(--font-size-sm)",
+                }}
+              >
+                May 2024
+              </p>
+              <ul
+                style={{
+                  paddingLeft: "1.2rem",
+                  color: "#4B5563",
+                  fontSize: "var(--font-size-base)",
+                }}
+              >
+                <li>Certificate in Web Application Development</li>
+                <li>Certificate in Cybersecurity</li>
+              </ul>
+            </div>
           </div>
         </div>
       </Container>
