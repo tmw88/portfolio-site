@@ -14,7 +14,7 @@ export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShowSplash(false), 2500); // total time = animation delay + duration
+    const timeout = setTimeout(() => setShowSplash(false), 2500);
     return () => clearTimeout(timeout);
   }, []);
 

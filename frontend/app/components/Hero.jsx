@@ -61,7 +61,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{
             color: "rgba(75, 85, 99, 0.85)",
-            fontSize: "var(--font-size-4xl)", // used to match original clamp max of 4rem
+            fontSize: "var(--font-size-5xl)",
             fontWeight: 700,
             marginBottom: "1.5rem",
           }}
