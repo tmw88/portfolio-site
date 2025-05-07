@@ -11,7 +11,6 @@ require("dotenv").config();
 
 const app = express();
 
-// 🔗 MongoDB Connection Test
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -20,7 +19,6 @@ mongoose
   .then(() => console.log("✅ MongoDB connected successfully"))
   .catch((err) => console.error("❌ MongoDB connection failed:", err));
 
-// Security: Rate Limiting to prevent spam
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 5,
