@@ -45,11 +45,10 @@ export default function About() {
             </h2>
 
             <p className="about-text-lg">
-              I’m a frontend developer who simply enjoys building things for the
-              web — from clean, intuitive user interfaces to robust backends and
-              scalable cloud infrastructure. What began as a love for visual
-              design evolved into a passion for crafting fast, accessible, and
-              thoughtful digital experiences.
+              I simply love to build and create. My interests span full-stack
+              development, UX/UI design, cloud computing, and database
+              management. I’m always excited to explore new technologies and
+              push the boundaries of what’s possible.
             </p>
 
             <p className="about-text-base">
@@ -72,7 +71,8 @@ export default function About() {
             </ul>
 
             <p className="about-text-note">
-              When I’m not coding, I’m usually running, or going to concerts.
+              When I'm not coding, you’ll usually find me doing cardio,
+              attending concerts, or planning my next adventure!{" "}
             </p>
           </div>
         </InView>

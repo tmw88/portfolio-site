@@ -100,9 +100,8 @@ export default function Hero() {
             lineHeight: 1.75,
           }}
         >
-          This site is dedicated to showcasing projects I have worked on. I am
-          currently interested in fullstack development, cloud computing, and
-          working with databases.
+          This site is for projects I've built and the technologies I’m
+          passionate about. Powered by AWS EC2.
         </motion.p>
 
         <motion.div
