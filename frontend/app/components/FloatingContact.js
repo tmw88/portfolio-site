@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail } from "lucide-react";
 import "./FloatingContact.css";
 
+const SITE_KEY = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
@@ -13,9 +14,12 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
     email: "",
     message: "",
   });
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
   const closeButtonRef = useRef(null);
+  const cooldownSeconds = 30;
 
   useEffect(() => {
     if (show && closeButtonRef.current) {
@@ -23,20 +27,54 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
     }
   }, [show]);
 
+  useEffect(() => {
+    let interval;
+    if (cooldown > 0) {
+      interval = setInterval(
+        () => setCooldown((prev) => Math.max(prev - 1, 0)),
+        1000
+      );
+    }
+    return () => clearInterval(interval);
+  }, [cooldown]);
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required.";
+    if (!formData.email.trim()) newErrors.email = "Email is required.";
+    else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email))
+      newErrors.email = "Invalid email.";
+    if (!formData.message.trim()) newErrors.message = "Message is required.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setResponseMessage("");
 
+    if (!validateForm()) return;
+
+    setLoading(true);
+
     try {
+      if (!window.hcaptcha) {
+        setResponseMessage("Captcha failed to load. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      const token = await window.hcaptcha.execute(SITE_KEY, { async: true });
+
       const response = await fetch(`${API_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, captchaToken: token }),
       });
 
       const data = await response.json();
@@ -44,6 +82,7 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
       if (response.ok) {
         setResponseMessage("Message sent successfully!");
         setFormData({ name: "", email: "", message: "" });
+        setCooldown(cooldownSeconds);
       } else {
         setResponseMessage(data.error || "Failed to send message.");
       }
@@ -104,11 +143,8 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                 >
                   <X size={18} />
                 </button>
-                <h3 id="contact-form-heading">Contact Me</h3>
+                <h3 id="contact-form-heading">Lets Work Together!</h3>
                 <form onSubmit={handleSubmit}>
-                  <label htmlFor="name" className="visually-hidden">
-                    Name
-                  </label>
                   <input
                     id="name"
                     type="text"
@@ -117,10 +153,15 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                     required
                     value={formData.name}
                     onChange={handleChange}
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? "name-error" : undefined}
                   />
-                  <label htmlFor="email" className="visually-hidden">
-                    Email
-                  </label>
+                  {errors.name && (
+                    <small id="name-error" className="field-error">
+                      {errors.name}
+                    </small>
+                  )}
+
                   <input
                     id="email"
                     type="email"
@@ -129,10 +170,15 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                     required
                     value={formData.email}
                     onChange={handleChange}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "email-error" : undefined}
                   />
-                  <label htmlFor="message" className="visually-hidden">
-                    Message
-                  </label>
+                  {errors.email && (
+                    <small id="email-error" className="field-error">
+                      {errors.email}
+                    </small>
+                  )}
+
                   <textarea
                     id="message"
                     name="message"
@@ -141,14 +187,34 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                     required
                     value={formData.message}
                     onChange={handleChange}
-                  ></textarea>
+                    aria-invalid={!!errors.message}
+                    aria-describedby={
+                      errors.message ? "message-error" : undefined
+                    }
+                  />
+                  {errors.message && (
+                    <small id="message-error" className="field-error">
+                      {errors.message}
+                    </small>
+                  )}
+
+                  <div
+                    className="h-captcha"
+                    data-sitekey={SITE_KEY}
+                    data-size="invisible"
+                  ></div>
+
                   <button
                     type="submit"
                     className="submit-button"
-                    disabled={loading}
+                    disabled={loading || cooldown > 0}
                     aria-busy={loading}
                   >
-                    {loading ? "Sending..." : "Send"}
+                    {loading
+                      ? "Sending..."
+                      : cooldown > 0
+                      ? `Please wait ${cooldown}s`
+                      : "Send"}
                   </button>
                 </form>
                 {responseMessage && (

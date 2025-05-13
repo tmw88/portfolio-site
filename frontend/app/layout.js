@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
@@ -50,6 +51,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Script
+          src="https://js.hcaptcha.com/1/api.js"
+          strategy="afterInteractive"
+        />
         {children}
       </body>
     </html>

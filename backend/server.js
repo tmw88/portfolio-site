@@ -7,6 +7,7 @@ const nodemailer = require("nodemailer");
 const rateLimit = require("express-rate-limit");
 const { body, validationResult } = require("express-validator");
 const mongoose = require("mongoose");
+const fetch = require("node-fetch");
 const projectsRoute = require("./routes/projects");
 require("dotenv").config();
 
@@ -59,6 +60,7 @@ app.post(
     body("name").isString().trim().isLength({ min: 2, max: 100 }).escape(),
     body("email").isEmail().normalizeEmail(),
     body("message").isString().trim().isLength({ min: 5, max: 1000 }).escape(),
+    body("captchaToken").isString().notEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -66,12 +68,36 @@ app.post(
       return res.status(400).json({ error: "Invalid input" });
     }
 
-    const { name, email, message } = req.body;
+    const { name, email, message, captchaToken } = req.body;
 
     if (process.env.NODE_ENV === "development") {
       console.log("Received contact form data:", { name, email, message });
     }
 
+    try {
+      const verifyRes = await fetch("https://hcaptcha.com/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: process.env.HCAPTCHA_SECRET_KEY,
+          response: captchaToken,
+        }),
+      });
+
+      const hcaptchaResult = await verifyRes.json();
+
+      if (!hcaptchaResult.success) {
+        console.warn("hCaptcha failed:", hcaptchaResult["error-codes"]);
+        return res.status(403).json({ error: "Captcha verification failed." });
+      }
+    } catch (captchaError) {
+      console.error("Captcha verification error:", captchaError);
+      return res
+        .status(500)
+        .json({ error: "Captcha verification failed. Try again." });
+    }
+
+    // ✅ If captcha passed, proceed with email sending
     try {
       let transporter = nodemailer.createTransport({
         service: "gmail",
