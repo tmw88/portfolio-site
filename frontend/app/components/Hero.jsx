@@ -52,7 +52,7 @@ export default function Hero() {
             letterSpacing: "0.05em",
           }}
         >
-          Hey👋, I'm
+          Hey there! I'm
         </motion.p>
 
         <motion.h1
@@ -83,8 +83,8 @@ export default function Hero() {
             lineHeight: 1.75,
           }}
         >
-          I build clean, responsive interfaces with modern web technologies —
-          focusing on performance and user experience.
+          I'm passionate about building clean, user-focused web experiences.
+          This site showcases some of the projects I've worked on.
         </motion.p>
 
         <motion.div

@@ -18,6 +18,7 @@ const ContactIcons = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
+          title="GitHub"
         >
           <FaGithub size={24} />
         </a>
@@ -26,6 +27,7 @@ const ContactIcons = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
+          title="LinkedIn"
         >
           <FaLinkedin size={24} />
         </a>

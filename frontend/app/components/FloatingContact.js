@@ -67,6 +67,8 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
             exit={{ opacity: 0, y: 10 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            title={show ? "Close Contact Form" : "Contact Me"}
+            aria-label={show ? "Close Contact Form" : "Contact Me"}
           >
             {show ? <X size={24} /> : <Mail size={24} />}
           </motion.button>

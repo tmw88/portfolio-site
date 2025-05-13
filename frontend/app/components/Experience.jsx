@@ -1,6 +1,6 @@
 "use client";
 
-import { Container } from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 import { Lato } from "next/font/google";
 import { InView } from "react-intersection-observer";
 
@@ -8,6 +8,15 @@ const lato = Lato({
   weight: ["300", "400", "700"],
   subsets: ["latin"],
 });
+
+const cardStyle = {
+  marginBottom: "2rem",
+  border: "none",
+  borderLeft: "4px solid #6366F1",
+  borderRadius: "0",
+  padding: "1.5rem 1.25rem",
+  backgroundColor: "transparent",
+};
 
 export default function Experience() {
   return (
@@ -37,144 +46,199 @@ export default function Experience() {
                 My Experience
               </h2>
 
-              <div style={{ marginTop: "2rem" }}>
-                <div style={{ marginBottom: "2rem" }}>
-                  <h5
-                    style={{
-                      color: "#1F2937",
-                      fontWeight: 600,
-                      fontSize: "var(--font-size-lg)",
-                    }}
+              {/* Application Support Specialist */}
+              <Card style={cardStyle}>
+                <Card.Body style={{ padding: 0 }}>
+                  <Card.Title
+                    as="h5"
+                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
                   >
-                    Frontend Developer{" "}
-                    <span
-                      style={{
-                        color: "#6366F1",
-                        fontWeight: 500,
-                        fontSize: "var(--font-size-base)",
-                      }}
-                    >
-                      @ Freelance
+                    Application Support Specialist{" "}
+                    <span style={{ color: "#6366F1", fontWeight: 500 }}>
+                      @ Washington University in St. Louis
                     </span>
-                  </h5>
-                  <p
+                  </Card.Title>
+                  <Card.Subtitle
                     style={{
                       fontStyle: "italic",
                       color: "#6B7280",
                       fontWeight: 300,
                       fontSize: "var(--font-size-sm)",
+                      marginBottom: "1rem",
                     }}
                   >
-                    Jan 2023 – Present
-                  </p>
+                    Jun 2024 – Present
+                  </Card.Subtitle>
+                  <ul style={{ paddingLeft: "1.2rem", color: "#4B5563" }}>
+                    <li>
+                      Provided expert technical support for university business
+                      systems, enhancing operational continuity.
+                    </li>
+                    <li>
+                      Thoroughly documented issues, solutions, and training
+                      procedures to support scalable knowledge sharing.
+                    </li>
+                    <li>
+                      Acted as a subject matter expert and key escalation point
+                      for IT-related issues across departments.
+                    </li>
+                  </ul>
+                </Card.Body>
+              </Card>
+
+              {/* University of Missouri – Training & User Support */}
+              <Card style={cardStyle}>
+                <Card.Body style={{ padding: 0 }}>
+                  <Card.Title
+                    as="h5"
+                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
+                  >
+                    Training Representative Support{" "}
+                    <span style={{ color: "#6366F1", fontWeight: 500 }}>
+                      @ University of Missouri
+                    </span>
+                  </Card.Title>
+                  <Card.Subtitle
+                    style={{
+                      fontStyle: "italic",
+                      color: "#6B7280",
+                      fontWeight: 300,
+                      fontSize: "var(--font-size-sm)",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    Jul 2023 – Jun 2024
+                  </Card.Subtitle>
                   <ul
                     style={{
                       paddingLeft: "1.2rem",
                       color: "#4B5563",
-                      fontSize: "var(--font-size-base)",
+                      marginBottom: "1.5rem",
                     }}
                   >
                     <li>
-                      Built responsive web applications using React and
-                      Bootstrap.
+                      Supervised and mentored a 15-person team, fostering a
+                      positive and inclusive work environment.
                     </li>
                     <li>
-                      Worked with clients to deliver tailored UI/UX solutions.
+                      Led one-on-one onboarding sessions to accelerate new hire
+                      readiness.
                     </li>
-                    <li>Integrated REST APIs and optimized performance.</li>
+                    <li>
+                      Developed detailed performance evaluations to guide team
+                      growth and improvement.
+                    </li>
                   </ul>
-                </div>
 
-                <div style={{ marginTop: "2rem" }}>
-                  <div style={{ marginBottom: "2rem" }}>
-                    <h5
-                      style={{
-                        color: "#1F2937",
-                        fontWeight: 600,
-                        fontSize: "var(--font-size-lg)",
-                      }}
-                    >
-                      User Support Analyst{" "}
-                      <span
-                        style={{
-                          color: "#6366F1",
-                          fontWeight: 500,
-                          fontSize: "var(--font-size-base)",
-                        }}
-                      >
-                        @ MU Division of IT
-                      </span>
-                    </h5>
-                    <p
-                      style={{
-                        fontStyle: "italic",
-                        color: "#6B7280",
-                        fontWeight: 300,
-                        fontSize: "var(--font-size-sm)",
-                      }}
-                    >
-                      Jan 2023 – Present
-                    </p>
-                    <ul
-                      style={{
-                        paddingLeft: "1.2rem",
-                        color: "#4B5563",
-                        fontSize: "var(--font-size-base)",
-                      }}
-                    >
-                      <li>
-                        Tested web applications for accessibility and
-                        compliance.
-                      </li>
-                      <li>
-                        Worked with clients to deliver tailored UI/UX solutions.
-                      </li>
-                      <li>Integrated REST APIs and optimized performance.</li>
-                    </ul>
-                  </div>
+                  <Card.Title
+                    as="h5"
+                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
+                  >
+                    User Support Analyst
+                  </Card.Title>
+                  <Card.Subtitle
+                    style={{
+                      fontStyle: "italic",
+                      color: "#6B7280",
+                      fontWeight: 300,
+                      fontSize: "var(--font-size-sm)",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    Apr 2022 – Jul 2023
+                  </Card.Subtitle>
+                  <ul style={{ paddingLeft: "1.2rem", color: "#4B5563" }}>
+                    <li>
+                      Administered Azure AD and O365 licenses, managing secure
+                      configurations and access controls.
+                    </li>
+                    <li>
+                      Oversaw Apple device compliance using Jamf, performing
+                      remote updates and audits.
+                    </li>
+                    <li>
+                      Resolved software, hardware, and network issues for 20+
+                      users daily with 98% satisfaction.
+                    </li>
+                  </ul>
+                </Card.Body>
+              </Card>
 
-                  <div style={{ marginBottom: "2rem" }}>
-                    <h5
-                      style={{
-                        color: "#1F2937",
-                        fontWeight: 600,
-                        fontSize: "var(--font-size-lg)",
-                      }}
-                    >
-                      University of Missouri🐯{" "}
-                      <span
-                        style={{
-                          color: "#6366F1",
-                          fontWeight: 500,
-                          fontSize: "var(--font-size-base)",
-                        }}
-                      >
-                        B.S. Information Technology
-                      </span>
-                    </h5>
-                    <p
-                      style={{
-                        fontStyle: "italic",
-                        color: "#6B7280",
-                        fontWeight: 300,
-                        fontSize: "var(--font-size-sm)",
-                      }}
-                    >
-                      May 2024
-                    </p>
-                    <ul
-                      style={{
-                        paddingLeft: "1.2rem",
-                        color: "#4B5563",
-                        fontSize: "var(--font-size-base)",
-                      }}
-                    >
-                      <li>Certificate in Web Application Development</li>
-                      <li>Certificate in Cybersecurity</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              {/* Video Engineering Intern */}
+              <Card style={cardStyle}>
+                <Card.Body style={{ padding: 0 }}>
+                  <Card.Title
+                    as="h5"
+                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
+                  >
+                    Video Engineering Intern{" "}
+                    <span style={{ color: "#6366F1", fontWeight: 500 }}>
+                      @ Fox Engineering Department
+                    </span>
+                  </Card.Title>
+                  <Card.Subtitle
+                    style={{
+                      fontStyle: "italic",
+                      color: "#6B7280",
+                      fontWeight: 300,
+                      fontSize: "var(--font-size-sm)",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    Summer 2022
+                  </Card.Subtitle>
+                  <ul style={{ paddingLeft: "1.2rem", color: "#4B5563" }}>
+                    <li>
+                      Automated AWS workflows using Go, significantly reducing
+                      manual intervention and improving uptime.
+                    </li>
+                    <li>
+                      Improved database visibility by integrating vendor APIs
+                      using Python and SQL.
+                    </li>
+                    <li>
+                      Tracked project progress and deliverables using Jira,
+                      ensuring timely and organized execution.
+                    </li>
+                  </ul>
+                </Card.Body>
+              </Card>
+
+              {/* Education */}
+              <h2
+                style={{
+                  fontWeight: 700,
+                  fontSize: "var(--font-size-xl)",
+                  marginBottom: "2rem",
+                }}
+              >
+                Education
+              </h2>
+
+              <Card style={cardStyle}>
+                <Card.Body style={{ padding: 0 }}>
+                  <Card.Title
+                    as="h5"
+                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
+                  >
+                    Bachelor of Science in Information Technology{" "}
+                    <span style={{ color: "#6366F1", fontWeight: 500 }}>
+                      @ University of Missouri – Columbia
+                    </span>
+                  </Card.Title>
+                  <Card.Subtitle
+                    style={{
+                      fontStyle: "italic",
+                      color: "#6B7280",
+                      fontWeight: 300,
+                      fontSize: "var(--font-size-sm)",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Graduated 2024
+                  </Card.Subtitle>
+                </Card.Body>
+              </Card>
             </div>
           )}
         </InView>

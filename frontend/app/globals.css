@@ -251,3 +251,19 @@ p {
   opacity: 1;
   transform: translateY(0);
 }
+.arrow-icon {
+  display: inline-block;
+  color: #6366f1;
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .arrow-icon {
+  transform: translateX(6px);
+}
+
+.arrow-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
