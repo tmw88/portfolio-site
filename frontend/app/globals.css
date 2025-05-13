@@ -251,19 +251,24 @@ p {
   opacity: 1;
   transform: translateY(0);
 }
-.arrow-icon {
-  display: inline-block;
-  color: #6366f1;
-  font-size: 1.25rem;
-  transition: transform 0.3s ease;
+.nav-link-custom:focus {
+  outline: 2px solid #3b82f6; /* Blue focus ring */
+  outline-offset: 4px;
+  border-radius: 4px;
 }
-
-.card:hover .arrow-icon {
-  transform: translateX(6px);
-}
-
-.arrow-wrapper {
+.about-tech-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.about-tech-item {
+  background-color: #e5e7eb;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
 }

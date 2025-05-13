@@ -35,7 +35,6 @@ app.use(
 
 app.use(express.json());
 
-// Security: Content Security Policy
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
@@ -48,7 +47,6 @@ app.get("/", (req, res) => {
   res.send("Backend is running!");
 });
 
-// 📬 Contact Form Route
 app.post(
   "/contact",
   contactLimiter,
@@ -97,7 +95,6 @@ app.post(
   }
 );
 
-// 🌐 Projects API
 app.use("/api/projects", projectsRoute);
 console.log("MONGODB_URI:", process.env.MONGODB_URI);
 

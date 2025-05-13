@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail } from "lucide-react";
 import "./FloatingContact.css";
@@ -15,6 +15,13 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
   });
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
+  const closeButtonRef = useRef(null);
+
+  useEffect(() => {
+    if (show && closeButtonRef.current) {
+      closeButtonRef.current.focus();
+    }
+  }, [show]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -56,8 +63,10 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Contact form"
         >
-          {/* Floating Mail Button */}
           <motion.button
             key="toggle-contact"
             className="contact-button"
@@ -68,27 +77,40 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             title={show ? "Close Contact Form" : "Contact Me"}
-            aria-label={show ? "Close Contact Form" : "Contact Me"}
+            aria-label={show ? "Close Contact Form" : "Open Contact Form"}
+            aria-expanded={show}
+            aria-controls="floating-contact-form"
           >
             {show ? <X size={24} /> : <Mail size={24} />}
           </motion.button>
 
-          {/* Contact Form */}
           <AnimatePresence>
             {show && (
               <motion.div
+                id="floating-contact-form"
                 className="contact-form"
                 key="contact-form"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
+                role="region"
+                aria-labelledby="contact-form-heading"
               >
-                <button className="close-button" onClick={handleClose}>
+                <button
+                  className="close-button"
+                  onClick={handleClose}
+                  aria-label="Close contact form"
+                  ref={closeButtonRef}
+                >
                   <X size={18} />
                 </button>
-                <h3>Contact Me</h3>
+                <h3 id="contact-form-heading">Contact Me</h3>
                 <form onSubmit={handleSubmit}>
+                  <label htmlFor="name" className="visually-hidden">
+                    Name
+                  </label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     placeholder="Name"
@@ -96,7 +118,11 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                     value={formData.name}
                     onChange={handleChange}
                   />
+                  <label htmlFor="email" className="visually-hidden">
+                    Email
+                  </label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     placeholder="Email"
@@ -104,7 +130,11 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                     value={formData.email}
                     onChange={handleChange}
                   />
+                  <label htmlFor="message" className="visually-hidden">
+                    Message
+                  </label>
                   <textarea
+                    id="message"
                     name="message"
                     placeholder="Your message"
                     rows="4"
@@ -116,12 +146,15 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                     type="submit"
                     className="submit-button"
                     disabled={loading}
+                    aria-busy={loading}
                   >
                     {loading ? "Sending..." : "Send"}
                   </button>
                 </form>
                 {responseMessage && (
                   <p
+                    aria-live="polite"
+                    className="response-message"
                     dangerouslySetInnerHTML={{
                       __html: responseMessage
                         .replace(/</g, "&lt;")

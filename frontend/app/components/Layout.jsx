@@ -9,7 +9,6 @@ import {
   NavbarBrand,
   NavbarCollapse,
   NavbarToggle,
-  NavLink,
 } from "react-bootstrap";
 import { motion } from "framer-motion";
 import FloatingContact from "./FloatingContact.js";
@@ -25,12 +24,12 @@ export default function Layout({ children }) {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showContactModal, setShowContactModal] = useState(false);
   const [showAnimatedNavbar, setShowAnimatedNavbar] = useState(false);
+  const [navbarExpanded, setNavbarExpanded] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowAnimatedNavbar(true); // Show after delay to match hero shimmer
+      setShowAnimatedNavbar(true);
     }, 4000);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -61,6 +60,7 @@ export default function Layout({ children }) {
         el.scrollIntoView({ behavior: "smooth" });
       }
     }
+    setNavbarExpanded(false); // collapse menu on link click
   };
 
   return (
@@ -80,6 +80,9 @@ export default function Layout({ children }) {
         <Navbar
           expand="lg"
           fixed="top"
+          aria-label="Main navigation"
+          expanded={navbarExpanded}
+          onToggle={setNavbarExpanded}
           className={`transition-navbar 
             ${scrolled ? "navbar-scrolled" : ""} 
             ${showNavbar ? "navbar-show" : "navbar-hide"}`}
@@ -97,27 +100,34 @@ export default function Layout({ children }) {
             <NavbarBrand className="nav-brand" href="#">
               TW
             </NavbarBrand>
-            <NavbarToggle aria-controls="basic-navbar-nav" />
+            <NavbarToggle
+              aria-controls="basic-navbar-nav"
+              aria-expanded={navbarExpanded}
+              aria-label="Toggle navigation"
+            />
             <NavbarCollapse id="basic-navbar-nav">
               <Nav className="ms-auto">
                 {["about", "experience", "projects", "contact"].map(
                   (section) => (
-                    <NavLink
+                    <a
                       key={section}
-                      href="#"
-                      className="nav-link-custom"
+                      href={`#${section}`}
                       onClick={(e) => {
                         e.preventDefault();
                         handleNavClick(section);
                       }}
+                      className="nav-link-custom"
+                      role="link"
                       style={{
-                        fontSize: "var(--font-size-sm)", // Using the CSS variable
+                        fontSize: "var(--font-size-sm)",
                         fontWeight: 400,
                         letterSpacing: "0.05em",
+                        padding: "0.5rem 1rem",
+                        display: "block",
                       }}
                     >
                       {section.charAt(0).toUpperCase() + section.slice(1)}
-                    </NavLink>
+                    </a>
                   )
                 )}
               </Nav>

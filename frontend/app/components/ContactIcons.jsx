@@ -4,6 +4,7 @@ import "./ContactIcons.css";
 const ContactIcons = () => {
   return (
     <footer
+      role="contentinfo"
       style={{
         backgroundColor: "#111827",
         color: "#FFFFFF",
@@ -12,24 +13,32 @@ const ContactIcons = () => {
         fontSize: "var(--font-size-sm)",
       }}
     >
-      <div className="contact-icons" style={{ marginBottom: "1rem" }}>
+      <div
+        className="contact-icons"
+        style={{
+          marginBottom: "1rem",
+          display: "flex",
+          justifyContent: "center",
+          gap: "1.5rem",
+        }}
+      >
         <a
           href="https://github.com/yourusername"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="GitHub"
+          aria-label="Visit Tristan's GitHub Profile"
           title="GitHub"
         >
-          <FaGithub size={24} />
+          <FaGithub size={24} aria-hidden="true" focusable="false" />
         </a>
         <a
           href="https://linkedin.com/in/yourusername"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="LinkedIn"
+          aria-label="Visit Tristan's LinkedIn Profile"
           title="LinkedIn"
         >
-          <FaLinkedin size={24} />
+          <FaLinkedin size={24} aria-hidden="true" focusable="false" />
         </a>
       </div>
 

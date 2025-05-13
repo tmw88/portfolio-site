@@ -18,6 +18,12 @@ const cardStyle = {
   backgroundColor: "transparent",
 };
 
+const cardTitleStyle = {
+  fontWeight: 600,
+  fontSize: "var(--font-size-lg)",
+  marginBottom: "0.5rem",
+};
+
 export default function Experience() {
   return (
     <section
@@ -28,6 +34,7 @@ export default function Experience() {
         backgroundColor: "#E5E7EB",
         color: "#1F2937",
       }}
+      aria-labelledby="experience-heading"
     >
       <Container>
         <InView triggerOnce threshold={0.15}>
@@ -37,22 +44,20 @@ export default function Experience() {
               className={`experience-content ${inView ? "fade-in" : ""}`}
             >
               <h2
+                id="experience-heading"
                 style={{
                   fontWeight: 700,
                   fontSize: "var(--font-size-xl)",
                   marginBottom: "2rem",
                 }}
+                tabIndex={0}
               >
                 My Experience
               </h2>
 
-              {/* Application Support Specialist */}
               <Card style={cardStyle}>
                 <Card.Body style={{ padding: 0 }}>
-                  <Card.Title
-                    as="h5"
-                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
-                  >
+                  <Card.Title as="h3" style={cardTitleStyle}>
                     Application Support Specialist{" "}
                     <span style={{ color: "#6366F1", fontWeight: 500 }}>
                       @ Washington University in St. Louis
@@ -86,13 +91,9 @@ export default function Experience() {
                 </Card.Body>
               </Card>
 
-              {/* University of Missouri – Training & User Support */}
               <Card style={cardStyle}>
                 <Card.Body style={{ padding: 0 }}>
-                  <Card.Title
-                    as="h5"
-                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
-                  >
+                  <Card.Title as="h3" style={cardTitleStyle}>
                     Training Representative Support{" "}
                     <span style={{ color: "#6366F1", fontWeight: 500 }}>
                       @ University of Missouri
@@ -130,10 +131,7 @@ export default function Experience() {
                     </li>
                   </ul>
 
-                  <Card.Title
-                    as="h5"
-                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
-                  >
+                  <Card.Title as="h3" style={cardTitleStyle}>
                     User Support Analyst
                   </Card.Title>
                   <Card.Subtitle
@@ -164,16 +162,12 @@ export default function Experience() {
                 </Card.Body>
               </Card>
 
-              {/* Video Engineering Intern */}
               <Card style={cardStyle}>
                 <Card.Body style={{ padding: 0 }}>
-                  <Card.Title
-                    as="h5"
-                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
-                  >
+                  <Card.Title as="h3" style={cardTitleStyle}>
                     Video Engineering Intern{" "}
                     <span style={{ color: "#6366F1", fontWeight: 500 }}>
-                      @ Fox Engineering Department
+                      @ Fox Corporation
                     </span>
                   </Card.Title>
                   <Card.Subtitle
@@ -204,23 +198,20 @@ export default function Experience() {
                 </Card.Body>
               </Card>
 
-              {/* Education */}
               <h2
                 style={{
                   fontWeight: 700,
                   fontSize: "var(--font-size-xl)",
                   marginBottom: "2rem",
                 }}
+                tabIndex={0}
               >
                 Education
               </h2>
 
               <Card style={cardStyle}>
                 <Card.Body style={{ padding: 0 }}>
-                  <Card.Title
-                    as="h5"
-                    style={{ fontWeight: 600, marginBottom: "0.5rem" }}
-                  >
+                  <Card.Title as="h3" style={cardTitleStyle}>
                     Bachelor of Science in Information Technology{" "}
                     <span style={{ color: "#6366F1", fontWeight: 500 }}>
                       @ University of Missouri – Columbia

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { Lato } from "next/font/google";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
 
 const lato = Lato({
@@ -13,6 +13,7 @@ const lato = Lato({
 
 export default function Hero() {
   const [shimmerDone, setShimmerDone] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,9 +23,19 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
+  const animationProps = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 20 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.6, delay: 0.2 },
+      };
+
   return (
     <section
       id="hero"
+      role="region"
+      aria-label="Hero section introducing Tristan Winship"
       className={lato.className}
       style={{
         minHeight: "100vh",
@@ -33,7 +44,7 @@ export default function Hero() {
         justifyContent: "center",
         backgroundColor: "#F9FAFB",
         backgroundImage:
-          "linear-gradient(to bottom right,rgb(253, 243, 217), #E0E7FF)",
+          "linear-gradient(to bottom right, rgb(253, 243, 217), #E0E7FF)",
         textAlign: "center",
         padding: "2rem",
         borderBottomLeftRadius: "4rem",
@@ -42,9 +53,13 @@ export default function Hero() {
     >
       <Container>
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          {...(prefersReducedMotion
+            ? {}
+            : {
+                initial: { opacity: 0, y: 10 },
+                animate: { opacity: 1, y: 0 },
+                transition: { duration: 0.6, delay: 0.1 },
+              })}
           style={{
             fontSize: "var(--font-size-md)",
             marginBottom: "0.75rem",
@@ -56,9 +71,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          {...animationProps}
           style={{
             color: "rgba(75, 85, 99, 0.85)",
             fontSize: "var(--font-size-5xl)",
@@ -72,9 +85,13 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          {...(prefersReducedMotion
+            ? {}
+            : {
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+                transition: { duration: 0.6, delay: 0.3 },
+              })}
           style={{
             fontSize: "var(--font-size-md)",
             fontWeight: 300,
@@ -83,8 +100,9 @@ export default function Hero() {
             lineHeight: 1.75,
           }}
         >
-          I'm passionate about building clean, user-focused web experiences.
-          This site showcases some of the projects I've worked on.
+          This site is dedicated to showcasing projects I have worked on. I am
+          currently interested in fullstack development, cloud computing, and
+          working with databases.
         </motion.p>
 
         <motion.div
@@ -93,6 +111,7 @@ export default function Hero() {
           transition={{ type: "spring", stiffness: 300 }}
         >
           <Button
+            aria-label="Scroll to projects section"
             href="#projects"
             style={{
               border: "2px solid #6366F1",

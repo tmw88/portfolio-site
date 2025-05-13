@@ -54,18 +54,22 @@ export default function Projects() {
         background: "linear-gradient(135deg, #f3f4f6, #ffffff)",
         color: "#1F2937",
       }}
+      aria-labelledby="projects-heading"
     >
       <Container>
         <h2
+          id="projects-heading"
           style={{
             fontSize: "var(--font-size-xl)",
             fontWeight: 700,
             marginBottom: "2.5rem",
           }}
+          tabIndex={0}
         >
           Projects I've Worked On
         </h2>
-        <Row className="gy-4">
+
+        <Row className="gy-4" role="list">
           {projects.map((project, index) => (
             <InView triggerOnce threshold={0.1} key={index}>
               {({ inView, ref }) => (
@@ -74,8 +78,9 @@ export default function Projects() {
                   lg={4}
                   ref={ref}
                   className={`project-card-wrapper ${inView ? "fade-in" : ""}`}
+                  role="listitem"
                 >
-                  <div
+                  <article
                     style={{
                       backgroundColor: "#ffffff",
                       borderRadius: "1rem",
@@ -88,6 +93,7 @@ export default function Projects() {
                       transition: "transform 0.2s ease, box-shadow 0.2s ease",
                       cursor: "default",
                     }}
+                    aria-labelledby={`project-title-${index}`}
                     onMouseOver={(e) => {
                       e.currentTarget.style.transform = "translateY(-4px)";
                       e.currentTarget.style.boxShadow =
@@ -102,7 +108,7 @@ export default function Projects() {
                     {project.image && (
                       <img
                         src={project.image}
-                        alt={project.title}
+                        alt={`${project.title} project screenshot`}
                         style={{
                           width: "100%",
                           height: "180px",
@@ -112,11 +118,13 @@ export default function Projects() {
                       />
                     )}
                     <h3
+                      id={`project-title-${index}`}
                       style={{
                         fontSize: "1.25rem",
                         fontWeight: 700,
                         margin: 0,
                       }}
+                      tabIndex={0}
                     >
                       {project.title}
                     </h3>
@@ -130,6 +138,7 @@ export default function Projects() {
                       {project.description}
                     </p>
                     <div
+                      aria-label="Technologies used"
                       style={{
                         display: "flex",
                         flexWrap: "wrap",
@@ -165,6 +174,7 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           style={linkStyle}
+                          aria-label={`View ${project.title} on GitHub`}
                           onMouseOver={(e) => {
                             e.currentTarget.style.transform = "scale(1.05)";
                             e.currentTarget.style.backgroundColor = "#DDE3FF";
@@ -174,7 +184,7 @@ export default function Projects() {
                             e.currentTarget.style.backgroundColor = "#EEF2FF";
                           }}
                         >
-                          <FaGithub /> GitHub
+                          <FaGithub aria-hidden="true" /> GitHub
                         </a>
                       )}
                       {project.demo && (
@@ -183,6 +193,7 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           style={linkStyle}
+                          aria-label={`Visit live demo of ${project.title}`}
                           onMouseOver={(e) => {
                             e.currentTarget.style.transform = "scale(1.05)";
                             e.currentTarget.style.backgroundColor = "#DDE3FF";
@@ -192,11 +203,11 @@ export default function Projects() {
                             e.currentTarget.style.backgroundColor = "#EEF2FF";
                           }}
                         >
-                          <FaExternalLinkAlt /> Live
+                          <FaExternalLinkAlt aria-hidden="true" /> Live
                         </a>
                       )}
                     </div>
-                  </div>
+                  </article>
                 </Col>
               )}
             </InView>

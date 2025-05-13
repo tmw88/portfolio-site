@@ -1,17 +1,20 @@
-.contact-icons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 0;
-}
-
 .contact-icons a {
-  color: #b8b8b8;
-  font-size: 1.75rem;
-  transition: color 0.2s ease;
+  color: #ffffff;
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 6px; /* Always add radius for smoother focus ring */
 }
 
-.contact-icons a:hover {
+.contact-icons a:hover,
+.contact-icons a:focus-visible {
+  transform: scale(1.1);
   color: #6366f1;
+}
+
+.contact-icons a:focus-visible {
+  box-shadow: 0 0 0 3px #3b82f6;
+  outline: none;
 }
