@@ -2,6 +2,7 @@
 
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
 const nodemailer = require("nodemailer");
 const rateLimit = require("express-rate-limit");
 const { body, validationResult } = require("express-validator");
@@ -25,6 +26,10 @@ const contactLimiter = rateLimit({
   message: "Too many requests, please try again later.",
 });
 
+app.use(helmet());
+app.use(helmet.frameguard({ action: "deny" }));
+app.use(helmet.noSniff());
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -33,12 +38,12 @@ app.use(
   })
 );
 
-app.use(express.json());
+app.use(express.json({ limit: "1kb" }));
 
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
+    "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'none';"
   );
   next();
 });
@@ -51,9 +56,9 @@ app.post(
   "/contact",
   contactLimiter,
   [
-    body("name").trim().isLength({ min: 2 }).escape(),
+    body("name").isString().trim().isLength({ min: 2, max: 100 }).escape(),
     body("email").isEmail().normalizeEmail(),
-    body("message").trim().isLength({ min: 5 }).escape(),
+    body("message").isString().trim().isLength({ min: 5, max: 1000 }).escape(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -62,9 +67,10 @@ app.post(
     }
 
     const { name, email, message } = req.body;
-    console.log("Received contact form data:", { name, email, message });
 
-    const sanitizedEmail = email.match(/^[\w.-]+@[\w.-]+\.\w+$/) ? email : "";
+    if (process.env.NODE_ENV === "development") {
+      console.log("Received contact form data:", { name, email, message });
+    }
 
     try {
       let transporter = nodemailer.createTransport({
@@ -75,12 +81,16 @@ app.post(
         },
       });
 
+      const sanitizedMessage = message
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
       let mailOptions = {
         from: `"Portfolio Contact Form" <no-reply@yourdomain.com>`,
-        replyTo: sanitizedEmail,
+        replyTo: email,
         to: process.env.EMAIL_USER,
         subject: `New Contact Form Submission from ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${sanitizedMessage}`,
       };
 
       await transporter.sendMail(mailOptions);
@@ -96,7 +106,15 @@ app.post(
 );
 
 app.use("/api/projects", projectsRoute);
-console.log("MONGODB_URI:", process.env.MONGODB_URI);
+
+if (process.env.NODE_ENV === "development") {
+  console.log("MONGODB_URI:", process.env.MONGODB_URI);
+}
+
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err.stack);
+  res.status(500).json({ error: "Internal Server Error" });
+});
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
