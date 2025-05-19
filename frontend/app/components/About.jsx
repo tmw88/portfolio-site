@@ -72,7 +72,7 @@ export default function About() {
 
             <p className="about-text-note">
               When I'm not coding, you’ll usually find me doing cardio,
-              attending concerts, or planning my next adventure!{" "}
+              attending concerts, or planning my next trip!{" "}
             </p>
           </div>
         </InView>

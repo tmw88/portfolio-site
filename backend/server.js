@@ -7,7 +7,6 @@ const nodemailer = require("nodemailer");
 const rateLimit = require("express-rate-limit");
 const { body, validationResult } = require("express-validator");
 const mongoose = require("mongoose");
-const fetch = require("node-fetch");
 const projectsRoute = require("./routes/projects");
 require("dotenv").config();
 
@@ -39,7 +38,8 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: "1kb" }));
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 
 app.use((req, res, next) => {
   res.setHeader(
@@ -71,7 +71,12 @@ app.post(
     const { name, email, message, captchaToken } = req.body;
 
     if (process.env.NODE_ENV === "development") {
-      console.log("Received contact form data:", { name, email, message });
+      console.log("Received contact form data:", {
+        name,
+        email,
+        message,
+        captchaToken,
+      });
     }
 
     try {
@@ -97,7 +102,6 @@ app.post(
         .json({ error: "Captcha verification failed. Try again." });
     }
 
-    // ✅ If captcha passed, proceed with email sending
     try {
       let transporter = nodemailer.createTransport({
         service: "gmail",

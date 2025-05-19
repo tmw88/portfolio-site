@@ -3,10 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail } from "lucide-react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import "./FloatingContact.css";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,8 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
   const [loading, setLoading] = useState(false);
   const [cooldown, setCooldown] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const captchaRef = useRef(null);
   const closeButtonRef = useRef(null);
   const cooldownSeconds = 30;
 
@@ -60,17 +63,30 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
 
     if (!validateForm()) return;
 
+    if (!captchaRef.current) {
+      setResponseMessage("Captcha not ready. Please refresh and try again.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      if (!window.hcaptcha) {
-        setResponseMessage("Captcha failed to load. Please try again.");
-        setLoading(false);
-        return;
-      }
+      await captchaRef.current.execute();
+    } catch (error) {
+      console.error("Captcha execution failed:", error);
+      setResponseMessage("Captcha error. Please try again.");
+      setLoading(false);
+    }
+  };
 
-      const token = await window.hcaptcha.execute(SITE_KEY, { async: true });
+  const handleCaptchaVerify = async (token) => {
+    if (!token) {
+      setResponseMessage("Captcha verification failed. Please try again.");
+      setLoading(false);
+      return;
+    }
 
+    try {
       const response = await fetch(`${API_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -87,10 +103,13 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
         setResponseMessage(data.error || "Failed to send message.");
       }
     } catch (error) {
+      console.error("Error in handleSubmit:", error);
       setResponseMessage("An error occurred. Please try again.");
     }
 
     setLoading(false);
+    setCaptchaToken(null);
+    captchaRef.current.resetCaptcha();
   };
 
   return (
@@ -143,7 +162,7 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                 >
                   <X size={18} />
                 </button>
-                <h3 id="contact-form-heading">Lets Work Together!</h3>
+                <h3 id="contact-form-heading">Let’s Work Together!</h3>
                 <form onSubmit={handleSubmit}>
                   <input
                     id="name"
@@ -198,12 +217,6 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                     </small>
                   )}
 
-                  <div
-                    className="h-captcha"
-                    data-sitekey={SITE_KEY}
-                    data-size="invisible"
-                  ></div>
-
                   <button
                     type="submit"
                     className="submit-button"
@@ -217,6 +230,14 @@ const FloatingContact = ({ show, handleOpen, handleClose, showAnimated }) => {
                       : "Send"}
                   </button>
                 </form>
+
+                <HCaptcha
+                  sitekey={SITE_KEY}
+                  size="invisible"
+                  ref={captchaRef}
+                  onVerify={handleCaptchaVerify}
+                />
+
                 {responseMessage && (
                   <p
                     aria-live="polite"
