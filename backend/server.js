@@ -20,6 +20,15 @@ mongoose
   .then(() => console.log("✅ MongoDB connected successfully"))
   .catch((err) => console.error("❌ MongoDB connection failed:", err));
 
+app.use((req, res, next) => {
+  if (req.path.substr(-1) === "/" && req.path.length > 1) {
+    const query = req.url.slice(req.path.length);
+    res.redirect(301, req.path.slice(0, -1) + query);
+  } else {
+    next();
+  }
+});
+
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 5,
