@@ -63,7 +63,7 @@ app.get("/", (req, res) => {
 });
 
 app.post(
-  "/contact",
+  "/api/contact",
   contactLimiter,
   [
     body("name").isString().trim().isLength({ min: 2, max: 100 }).escape(),
