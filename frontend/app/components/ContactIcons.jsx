@@ -23,19 +23,19 @@ const ContactIcons = () => {
         }}
       >
         <a
-          href="https://github.com/yourusername"
+          href="https://github.com/tmw88"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Visit Tristan's GitHub Profile"
+          aria-label="Visit My GitHub Profile"
           title="GitHub"
         >
           <FaGithub size={24} aria-hidden="true" focusable="false" />
         </a>
         <a
-          href="https://linkedin.com/in/yourusername"
+          href="https://www.linkedin.com/in/tristan-winship/"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Visit Tristan's LinkedIn Profile"
+          aria-label="Visit My LinkedIn Profile"
           title="LinkedIn"
         >
           <FaLinkedin size={24} aria-hidden="true" focusable="false" />

@@ -45,10 +45,10 @@ export default function About() {
             </h2>
 
             <p className="about-text-lg">
-              I simply love to build and create. My interests span full-stack
-              development, UX/UI design, cloud computing, and database
-              management. I’m always excited to explore new technologies and
-              push the boundaries of what’s possible.
+              I simply love to build and create things. My interests span
+              full-stack development, UX/UI design, cloud computing, and
+              database management. I’m always excited to explore new
+              technologies and push the boundaries of what’s possible.
             </p>
 
             <p className="about-text-base">
