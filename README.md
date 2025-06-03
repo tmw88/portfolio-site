@@ -19,7 +19,7 @@ Welcome to the source code for my personal portfolio website: [tristanwinship.co
 
 **Backend:**
 - Node.js with Express
-- PostgreSQL (for projects and contact submissions)
+- MongoDB (for projects)
 - Rate-limiting and CAPTCHA validation
 
 **Deployment:**
