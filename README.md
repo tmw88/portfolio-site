@@ -1,6 +1,6 @@
 # Tristan Winship — Portfolio Website
 
-Welcome to the source code for my personal portfolio website: [tristanwinship.com](https://tristanwinship.com). This site highlights my work, experience, and contact information as a full-stack developer.
+Welcome to the source code for my personal portfolio website: [tristanwinship.com](https://tristanwinship.com). This site highlights my work, experience, and contact information as a developer.
 
 ## Features
 
