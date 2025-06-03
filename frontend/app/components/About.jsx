@@ -20,9 +20,10 @@ export default function About() {
         padding: "100px 0",
         backgroundColor: "#F9FAFB",
         color: "#333333",
+        position: "relative",
       }}
     >
-      <Container>
+      <Container style={{ position: "relative" }}>
         <InView
           as="div"
           triggerOnce
@@ -39,7 +40,27 @@ export default function About() {
             }
           }}
         >
-          <div id="about-content" className="about-content">
+          <div
+            id="about-content"
+            className="about-content"
+            style={{ position: "relative" }}
+          >
+            <img
+              src="/IMG_7406.JPG"
+              alt="Tristan's profile photo"
+              width={300}
+              height={300}
+              style={{
+                borderRadius: "50%",
+                objectFit: "cover",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                position: "absolute",
+                right: 120,
+                top: "50%",
+                transform: "translateY(-50%)",
+              }}
+            />
+
             <h2 id="about-heading" className="about-title">
               About Me
             </h2>
@@ -72,7 +93,7 @@ export default function About() {
 
             <p className="about-text-note">
               When I'm not coding, you’ll usually find me doing cardio,
-              attending concerts, or planning my next trip!{" "}
+              attending concerts, or planning my next trip!
             </p>
           </div>
         </InView>
