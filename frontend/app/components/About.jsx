@@ -40,61 +40,52 @@ export default function About() {
             }
           }}
         >
-          <div
-            id="about-content"
-            className="about-content"
-            style={{ position: "relative" }}
-          >
-            <img
-              src="/IMG_7406.JPG"
-              alt="Tristan's profile photo"
-              width={300}
-              height={300}
-              style={{
-                borderRadius: "50%",
-                objectFit: "cover",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                position: "absolute",
-                right: 120,
-                top: "50%",
-                transform: "translateY(-50%)",
-              }}
-            />
+          <div id="about-content" className="about-content">
+            <div className="about-text-wrapper">
+              <h2 id="about-heading" className="about-title">
+                About Me
+              </h2>
 
-            <h2 id="about-heading" className="about-title">
-              About Me
-            </h2>
+              <p className="about-text-lg">
+                I simply love to build and create things. My interests span
+                full-stack development, UX/UI design, cloud computing, and
+                database management. I’m always excited to explore new
+                technologies and push the boundaries of what’s possible.
+              </p>
 
-            <p className="about-text-lg">
-              I simply love to build and create things. My interests span
-              full-stack development, UX/UI design, cloud computing, and
-              database management. I’m always excited to explore new
-              technologies and push the boundaries of what’s possible.
-            </p>
+              <p className="about-text-base">
+                Technologies I’ve been working with recently:
+              </p>
 
-            <p className="about-text-base">
-              Technologies I’ve been working with recently:
-            </p>
+              <ul className="about-tech-list">
+                {[
+                  "JavaScript (ES6+)",
+                  "React",
+                  "Next.js",
+                  "Bootstrap",
+                  "Node.js",
+                  "MongoDB",
+                ].map((tech, index) => (
+                  <li key={index} className="about-tech-item">
+                    {tech}
+                  </li>
+                ))}
+              </ul>
 
-            <ul className="about-tech-list">
-              {[
-                "JavaScript (ES6+)",
-                "React",
-                "Next.js",
-                "Bootstrap",
-                "Node.js",
-                "MongoDB",
-              ].map((tech, index) => (
-                <li key={index} className="about-tech-item">
-                  {tech}
-                </li>
-              ))}
-            </ul>
+              <p className="about-text-note">
+                When I'm not coding, you’ll usually find me doing cardio,
+                attending concerts, or planning my next trip!
+              </p>
+            </div>
 
-            <p className="about-text-note">
-              When I'm not coding, you’ll usually find me doing cardio,
-              attending concerts, or planning my next trip!
-            </p>
+            <div className="about-image-wrapper">
+              <img
+                src="/IMG_7406.JPG"
+                alt="Tristan's profile photo"
+                width={300}
+                height={300}
+              />
+            </div>
           </div>
         </InView>
       </Container>

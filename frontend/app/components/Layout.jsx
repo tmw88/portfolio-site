@@ -60,7 +60,7 @@ export default function Layout({ children }) {
         el.scrollIntoView({ behavior: "smooth" });
       }
     }
-    setNavbarExpanded(false); // collapse menu on link click
+    setNavbarExpanded(false);
   };
 
   return (

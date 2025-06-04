@@ -46,9 +46,9 @@ p {
 }
 
 .loading-bar-container {
-  width: 200px; /* adjust as needed */
+  width: 200px;
   height: 4px;
-  background-color: #1f2937; /* background track (optional) */
+  background-color: #1f2937;
   border-radius: 2px;
   overflow: hidden;
   margin-top: 1rem;
@@ -56,10 +56,9 @@ p {
 
 .intro-loading-bar {
   height: 100%;
-  background-color: #6366f1; /* loading color */
+  background-color: #6366f1;
   border-radius: 2px;
 }
-/* Navbar transitions */
 .transition-navbar {
   background-color: transparent;
   padding: 1rem 0;
@@ -81,7 +80,6 @@ p {
   transform: translateY(0);
 }
 
-/* Navbar brand and links */
 .nav-brand {
   font-weight: 700;
   font-size: var(--font-size-md);
@@ -115,7 +113,6 @@ p {
   width: 100%;
 }
 
-/* Gradient animation */
 .gradient-text {
   background: linear-gradient(
     120deg,
@@ -145,36 +142,51 @@ p {
 .text-solid {
   color: #000;
 }
-#about-content,
-.about-content {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-  background: linear-gradient(135deg, #c7d2fe, #a5b4fc);
+.about-section {
+  padding: 100px 0;
+  background-color: #f9fafb;
   color: #333333;
+}
+
+.about-container {
+  position: relative;
+}
+
+.about-content {
+  background: linear-gradient(135deg, #c7d2fe, #a5b4fc);
   border-radius: 1.5rem;
   padding: 3rem 4rem;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow: hidden;
-  width: 100%;
-  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 .animate-in {
-  animation: fadeInUp 1s ease-out forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.about-text-wrapper {
+  flex: 1 1 500px;
+  min-width: 300px;
+}
+
+.about-image-wrapper {
+  flex: 0 0 auto;
+  max-width: 300px;
+}
+
+.about-image-wrapper img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .about-title {
@@ -187,7 +199,6 @@ p {
   font-weight: 400;
   font-size: var(--font-size-lg);
   line-height: 1.8;
-  max-width: 720px;
   color: #374151;
 }
 
@@ -205,61 +216,9 @@ p {
 }
 
 .about-tech-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 1.5rem;
-}
-
-.about-tech-item {
-  padding: 6px 12px;
-  background-color: #e0e7ff;
-  border-radius: 20px;
-  color: #1f2937;
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  transition: transform 0.2s ease;
-  cursor: default;
-}
-
-.about-tech-item:hover {
-  transform: scale(1.05);
-}
-.experience-section {
-  padding: 80px 0;
-  background-color: #e5e7eb;
-  color: #1f2937;
-}
-
-.experience-content {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.experience-content.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-.project-card-wrapper {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.project-card-wrapper.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-.nav-link-custom:focus {
-  outline: 2px solid #3b82f6; /* Blue focus ring */
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-.about-tech-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 1rem 0 1.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -271,4 +230,48 @@ p {
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 500;
+  color: #1f2937;
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.about-tech-item:hover {
+  transform: scale(1.05);
+}
+
+/* Other reusable sections */
+.experience-section {
+  padding: 80px 0;
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.experience-content,
+.project-card-wrapper {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.experience-content.fade-in,
+.project-card-wrapper.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-link-custom:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+@media (max-width: 991px) {
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-image-wrapper {
+    margin-top: 2rem;
+  }
 }
